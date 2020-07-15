@@ -1,9 +1,13 @@
 package com.simplerestapp.SimpleRestServer.model;
  
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import javax.persistence.*;
+import java.util.Date;
+import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "card")
@@ -11,6 +15,7 @@ public class Card {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, length = 10)
     private long id;
 
     @Column(name = "title")
@@ -21,6 +26,7 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "state_code")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private State state;
 
     @Column(name = "last_modified")
