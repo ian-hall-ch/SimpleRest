@@ -27,35 +27,39 @@ import com.simplerestapp.SimpleRestServer.repo.CardRepository;
 public class CardController {
 
     @Autowired
-    CardRepository repository;
+    CardRepository cardRepo;
+
+    @Autowired
+    CardRepository stateRepo;
 
     @GetMapping("/cards")
     public List<Card> getAllCards() {
         System.out.println("Get all Cards...");
 
         List<Card> cards = new ArrayList<>();
-        repository.findAll().forEach(cards::add);
+        cardRepo.findAll().forEach(cards::add);
 
         return cards;
     }
 
     @PostMapping("/cards/create")
     public Card postCard(@RequestBody Card card) {
-        Card _card = repository.save(new Card(card.getTitle(), card.getDescription()));
+        Card _card = cardRepo.save(new Card(card.getTitle(), card.getDescription()));
         return _card;
     }
 
-    @GetMapping("/cards/title/{id}")
-    public List<Card> findByTitle(@PathVariable String title) {
-        List<Card> cards = repository.findByTitle(title);
-        return cards;
-    }
+    // @GetMapping("/cards/title/{id}")
+    // public List<Card> findByTitle(@PathVariable long id) {
+    //     List<Card> cards = cardRepo.findById(id);
+    //     cardRepo.get
+    //     return cards;
+    // }
 
     @PutMapping("/cards/{id}")
     public ResponseEntity<Card> updateCard(@PathVariable("id") long id, @RequestBody Card card) {
         System.out.println("Update Card with ID = " + id + "...");
 
-        Optional<Card> cardData = repository.findById(id);
+        Optional<Card> cardData = cardRepo.findById(id);
 
         if(cardData.isPresent()) {
             Card _card = cardData.get();
@@ -63,7 +67,7 @@ public class CardController {
             _card.setDescription(card.getDescription());
             // _card.setStateCode(card.getStateCode());
             _card.setLastModified(new Date(System.currentTimeMillis()));
-            return new ResponseEntity<>(repository.save(_card), HttpStatus.OK);
+            return new ResponseEntity<>(cardRepo.save(_card), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

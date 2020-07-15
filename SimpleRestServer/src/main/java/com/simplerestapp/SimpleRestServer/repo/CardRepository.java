@@ -1,9 +1,8 @@
 package com.simplerestapp.SimpleRestServer.repo;
  
-import java.util.List;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.simplerestapp.SimpleRestServer.model.Card;
  
-public interface CardRepository extends CrudRepository<Card, Long> {
-    List<Card> findByTitle(String title);
+public interface CardRepository extends JpaRepository<Card, Long> {
+
 }

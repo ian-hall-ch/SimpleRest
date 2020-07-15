@@ -3,7 +3,7 @@ package com.simplerestapp.SimpleRestServer.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import com.simplerestapp.SimpleRestServer.model.State;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "card")
@@ -55,13 +55,19 @@ public class Card {
         this.description = description;
     }
 
-    // public int getStateCode() {
-    //     return state_code;
-    // }
+    public int getStateCode() {
+        return state.getCode(); 
+    }
 
-    // public void setStateCode(int state_code) {
-    //     this.state_code = state_code;
-    // }
+    @JsonIgnore
+    public State getState() {
+        return state;
+    }
+
+    @JsonIgnore
+    public void setState(State state) {
+        this.state = state;
+    }
 
     public Date getLastModified() {
         return last_modified;
