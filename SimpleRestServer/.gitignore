@@ -1,8 +1,2 @@
-.gradle/*
 .build/*
 build/**/*
-/gradle/wrapper/gradle-wrapper.properties
-gradle/**/*
-gradlew
-gradlew.bat
-*.bat
