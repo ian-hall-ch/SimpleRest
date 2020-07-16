@@ -1,0 +1,27 @@
+<div
+  class="board"
+  cdkDropList
+  [cdkDropListData]="state$"
+  (cdkDropListDropped)="onStateDrop($event)"
+  cdkDropListOrientation="horizontal"
+>
+  <div class="card-list mat-elevation-z1" *ngFor="let state of state$ | async">
+    <h2 cdkDragHandle class="mat-h2">{{ state.description }}</h2>
+
+    <div
+      class="card-list-content"
+      cdkDropList
+      [id]="state.id"
+      [cdkDropListData]="state.cards"
+      [cdkDropListConnectedTo]="stateIds"
+      (cdkDropListDropped)="onCardDrop($event)"
+    >
+      <mat-card *ngFor="let card of state.cards" cdkDrag>
+        <mat-card-content>
+          {{ card.title }}
+          <div *ngIf="card.description">{{ card.description }}</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
