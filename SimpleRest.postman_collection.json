@@ -39,7 +39,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/card/1",
+					"raw": "http://localhost:8080/v1/cards/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -47,7 +47,7 @@
 					"port": "8080",
 					"path": [
 						"v1",
-						"card",
+						"cards",
 						"1"
 					]
 				}
@@ -71,7 +71,7 @@
 					"raw": "{\n\t\"title\":\"Created from API\",\n\t\"description\":\"This is a card that was created using a POST to the API\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/0/card",
+					"raw": "http://localhost:8080/v1/0/cards",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -80,7 +80,7 @@
 					"path": [
 						"v1",
 						"0",
-						"card"
+						"cards"
 					]
 				}
 			},
@@ -103,7 +103,7 @@
 					"raw": "{\n    \"title\": \"Test Card 1\",\n    \"description\": \"This is a test TODO changed\",\n    \"stateId\": 0\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/card/1",
+					"raw": "http://localhost:8080/v1/cards/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -111,7 +111,7 @@
 					"port": "8080",
 					"path": [
 						"v1",
-						"card",
+						"cards",
 						"1"
 					]
 				}
@@ -152,7 +152,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/state/0",
+					"raw": "http://localhost:8080/v1/states/0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -160,7 +160,7 @@
 					"port": "8080",
 					"path": [
 						"v1",
-						"state",
+						"states",
 						"0"
 					]
 				}
@@ -184,7 +184,7 @@
 					"raw": "{\n\t\"id\":3,\n\t\"description\":\"SOME NEW CATEGORY\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/state",
+					"raw": "http://localhost:8080/v1/states",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -192,7 +192,7 @@
 					"port": "8080",
 					"path": [
 						"v1",
-						"state"
+						"states"
 					]
 				}
 			},
@@ -215,7 +215,7 @@
 					"raw": "{\n\t\"description\":\"TODO changed\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/state/0",
+					"raw": "http://localhost:8080/v1/states/0",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -223,7 +223,7 @@
 					"port": "8080",
 					"path": [
 						"v1",
-						"state",
+						"states",
 						"0"
 					]
 				}

@@ -31,21 +31,21 @@ public class CardStateController {
         return stateService.getStates();
     }
 
-    @RequestMapping(value = "/state/{stateId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/states/{stateId}", method = RequestMethod.GET)
     public Optional<State> findStateById(@PathVariable(value = "stateId") long stateId) {
         System.out.println("Get State by Id: " + stateId);
         
         return stateService.getStateById(stateId);
     }
 
-    @RequestMapping(value = "/state", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/states", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public State createState(@RequestBody State state) {
         System.out.println("Creating State: " + state.getId());
 
         return stateService.createState(state);
     }
 
-    @RequestMapping(value = "/state/{stateId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/states/{stateId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public State updateState(@PathVariable(value = "stateId") long stateId, @RequestBody State state) {
         System.out.println("Update State...");
         
@@ -60,21 +60,21 @@ public class CardStateController {
         return cardService.getCards();
     }
 
-    @RequestMapping(value = "/card/{cardId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/cards/{cardId}", method = RequestMethod.GET)
     public Optional<Card> findByCardId(@PathVariable(value = "cardId") long cardId) {
         System.out.println("Get Card by Id: " + cardId);
 
         return cardService.getCardById(cardId);
     }
 
-    @RequestMapping(value = "/{stateId}/card", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{stateId}/cards", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Card createCard(@PathVariable(value = "stateId") long stateId, @RequestBody Card card) {
         System.out.println("Creating Card...");
         
         return cardService.createCard(stateId, card);
     }
 
-    @RequestMapping(value = "/card/{cardId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/cards/{cardId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Card updateCard(@PathVariable(value = "cardId") long cardId, @RequestBody Card card) {
         System.out.println("Update Card...");
         
