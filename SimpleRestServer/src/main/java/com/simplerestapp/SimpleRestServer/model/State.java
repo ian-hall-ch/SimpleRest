@@ -45,12 +45,10 @@ public class State {
         this.description = description;
     }
 
-    @JsonIgnore
     public Set<Card> getCards() {
         return cards;
     }
 
-    @JsonIgnore
     public void setCards(Set<Card> cards) {
         this.cards = cards;
     }
@@ -65,7 +63,7 @@ public class State {
 
     @PrePersist
     protected void prePersist() {
-        if (this.lastModified == null) 
+        if (this.lastModified == null)
             lastModified = new Date(System.currentTimeMillis());
     }
 
