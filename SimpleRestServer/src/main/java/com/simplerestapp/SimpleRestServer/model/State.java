@@ -1,43 +1,40 @@
 package com.simplerestapp.SimpleRestServer.model;
- 
+
+import com.simplerestapp.SimpleRestServer.model.Card;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
+
 import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
-import com.simplerestapp.SimpleRestServer.model.Card;
 
 @Entity
 @Table(name = "state")
 public class State {
 
     @Id
-    @Column(name = "code")
-    private int code;
+    @Column(name = "id", nullable = false, length = 10)
+    private long id;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
-
-    @Column(name = "last_modified")
-    private Date last_modified;
 
     @OneToMany(mappedBy = "state", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Card> cards = new HashSet<>();
 
+    @Column(name = "last_modified", nullable = false)
+    private Date lastModified;
+
     public State() {
     }
 
-    public State(int code, String description) {
-        this.code = code;
-        this.description = description;
-        this.last_modified = new Date(System.currentTimeMillis());
+    public long getId() {
+        return id;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -48,16 +45,37 @@ public class State {
         this.description = description;
     }
 
-    public Date getLastModified() {
-        return last_modified;
+    @JsonIgnore
+    public Set<Card> getCards() {
+        return cards;
     }
 
-    public void setLastModified(Date last_modified) {
-        this.last_modified = last_modified;
+    @JsonIgnore
+    public void setCards(Set<Card> cards) {
+        this.cards = cards;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    @PrePersist
+    protected void prePersist() {
+        if (this.lastModified == null) 
+            lastModified = new Date(System.currentTimeMillis());
+    }
+
+    @PreUpdate
+    protected void preUpdate() {
+        this.lastModified = new Date(System.currentTimeMillis());
     }
 
     @Override
     public String toString() {
-        return "State [code=" + code + ", description=" + description + ", last_modified=" + last_modified + "]";
+        return "State [id=" + id + ", description=" + description + ", lastModified=" + lastModified + "]";
     }
 }

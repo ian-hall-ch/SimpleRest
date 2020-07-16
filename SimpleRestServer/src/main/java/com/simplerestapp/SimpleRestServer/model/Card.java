@@ -1,5 +1,5 @@
 package com.simplerestapp.SimpleRestServer.model;
- 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -14,31 +14,25 @@ import java.io.Serializable;
 public class Card {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, length = 10)
     private long id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "state_code")
+    @JoinColumn(name = "state_code", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private State state;
 
-    @Column(name = "last_modified")
-    private Date last_modified;
+    @Column(name = "last_modified", nullable = false)
+    private Date lastModified;
 
     public Card() {
-    }
-
-    public Card(String title, String description) {
-        this.title = title;
-        this.description = description;
-        this.last_modified = new Date(System.currentTimeMillis());
     }
 
     public long getId() {
@@ -61,8 +55,8 @@ public class Card {
         this.description = description;
     }
 
-    public int getStateCode() {
-        return state.getCode(); 
+    public long getStateId() {
+        return state.getId(); 
     }
 
     @JsonIgnore
@@ -76,15 +70,26 @@ public class Card {
     }
 
     public Date getLastModified() {
-        return last_modified;
+        return lastModified;
     }
 
-    public void setLastModified(Date last_modified) {
-        this.last_modified = last_modified;
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    @PrePersist
+    protected void prePersist() {
+        if (this.lastModified == null) 
+            lastModified = new Date(System.currentTimeMillis());
+    }
+
+    @PreUpdate
+    protected void preUpdate() {
+        this.lastModified = new Date(System.currentTimeMillis());
     }
 
     @Override
     public String toString() {
-        return "Card [id=" + id + ", title=" + title + ", description=" + description + ", state=" + state.getCode() + ", last_modified=" + last_modified + "]";
+        return "Card [id=" + id + ", title=" + title + ", description=" + description + ", stateId=" + state.getId() + ", lastModifed=" + lastModified + "]";
     }
 }
