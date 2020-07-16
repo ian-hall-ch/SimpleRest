@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Date;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/v1")
 public class CardStateController {
@@ -34,7 +34,7 @@ public class CardStateController {
     @RequestMapping(value = "/states/{stateId}", method = RequestMethod.GET)
     public Optional<State> findStateById(@PathVariable(value = "stateId") long stateId) {
         System.out.println("Get State by Id: " + stateId);
-        
+
         return stateService.getStateById(stateId);
     }
 
@@ -48,7 +48,7 @@ public class CardStateController {
     @RequestMapping(value = "/states/{stateId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public State updateState(@PathVariable(value = "stateId") long stateId, @RequestBody State state) {
         System.out.println("Update State...");
-        
+
         return stateService.updateState(stateId, state);
     }
 
@@ -70,14 +70,14 @@ public class CardStateController {
     @RequestMapping(value = "/{stateId}/cards", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Card createCard(@PathVariable(value = "stateId") long stateId, @RequestBody Card card) {
         System.out.println("Creating Card...");
-        
+
         return cardService.createCard(stateId, card);
     }
 
     @RequestMapping(value = "/cards/{cardId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Card updateCard(@PathVariable(value = "cardId") long cardId, @RequestBody Card card) {
         System.out.println("Update Card...");
-        
+
         return cardService.updateCard(cardId, card);
     }
 }
